@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SaveVideo4Free - Download YouTube, Instagram, TikTok Videos & Songs</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="SaveVideo4Free - Your ultimate platform to download videos from YouTube, Instagram, TikTok, and convert to MP3, all for free in any format. Fast, easy, and secure video downloads.">
+    <meta name="keywords" content="youtube video downloader, instagram video downloader, tiktok video downloader, download youtube videos, download instagram reels, download tiktok videos, free video downloader, convert video to mp3, save video online, mp4 downloader, hd video download, savevideo4free">
+    <meta name="author" content="SaveVideo4Free Team">
+    
+    <!-- Open Graph / Social Media Meta Tags -->
+    <meta property="og:title" content="SaveVideo4Free - Download YouTube, Instagram, TikTok Videos & Songs">
+    <meta property="og:description" content="Your ultimate platform to download videos from YouTube, Instagram, TikTok, and convert to MP3, all for free in any format. Fast, easy, and secure video downloads.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.savevideo4free.com"> <!-- Replace with your actual domain -->
+    <meta property="og:image" content="https://www.savevideo4free.com/og-image.jpg"> <!-- Create an attractive social sharing image -->
+    <meta property="og:site_name" content="SaveVideo4Free">
+
+    <!-- Favicon -->
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    
+    <style>
+        /* Basic Reset & Body Styling */
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Montserrat:wght@300;400;700&display=swap');
+
+        :root {
+            --primary-blue: #00bcd4;
+            --secondary-purple: #9c27b0;
+            --neon-green: #39ff14;
+            --dark-bg: #0a0e1a;
+            --dark-card: #1c2138;
+            --text-light: #e0e0e0;
+            --gradient-1: linear-gradient(45deg, #00c6ff, #0072ff);
+            --gradient-2: linear-gradient(45deg, #a72dff, #d233e7);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text-light);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden; /* For background animations */
+            position: relative;
+        }
+
+        /* Background Animations - Conceptual */
+        .background-portal {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 150vw; /* Larger than viewport to cover */
+            height: 150vh;
+            background: radial-gradient(circle at center, rgba(0,255,255,0.1) 0%, rgba(150,0,255,0.1) 20%, transparent 60%);
+            transform: translate(-50%, -50%) rotate(0deg);
+            animation: portalSpin 60s linear infinite;
+            z-index: 0;
+            opacity: 0.7;
+            pointer-events: none; /* Allows clicks through */
+        }
+
+        .background-stars {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(2px 2px at 20px 30px, #eee, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 40px 70px, #eee, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 80px 10px, #eee, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 120px 50px, #eee, rgba(0,0,0,0)); /* More of these for denser stars */
+            background-size: 150px 150px; /* Adjust spacing */
+            animation: starfieldPan 120s linear infinite;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        @keyframes portalSpin {
+            from { transform: translate(-50%, -50%) rotate(0deg); }
+            to { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        @keyframes starfieldPan {
+            from { background-position: 0 0; }
+            to { background-position: 1500px 1500px; } /* Adjust to match background-size * N */
+        }
+
+        /* Main Container */
+        .container {
+            position: relative;
+            z-index: 1;
+            background: rgba(28, 33, 56, 0.7); /* Slightly transparent card */
+            border-radius: 25px;
+            padding: 40px 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            backdrop-filter: blur(10px); /* Frosted glass effect */
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            max-width: 900px;
+            width: 90%;
+        }
+
+        /* Header */
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3.5em;
+            margin-bottom: 25px;
+            background: linear-gradient(45deg, var(--primary-blue), var(--secondary-purple), var(--neon-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 15px rgba(0, 255, 255, 0.4), 0 0 25px rgba(150, 0, 255, 0.3);
+            animation: logoGlow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes logoGlow {
+            from { text-shadow: 0 0 10px rgba(0, 255, 255, 0.4), 0 0 20px rgba(150, 0, 255, 0.3); }
+            to { text-shadow: 0 0 20px rgba(0, 255, 255, 0.6), 0 0 30px rgba(150, 0, 255, 0.5); }
+        }
+        
+        /* Input Section */
+        .input-section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 30px;
+            gap: 15px; /* Spacing between input and button */
+        }
+
+        .video-url-input {
+            width: 70%;
+            padding: 18px 25px;
+            border: 2px solid transparent;
+            border-image: var(--gradient-1) 1;
+            border-radius: 12px;
+            background-color: rgba(255, 255, 255, 0.08);
+            color: var(--text-light);
+            font-size: 1.1em;
+            outline: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(0, 198, 255, 0.2);
+        }
+
+        .video-url-input::placeholder {
+            color: rgba(224, 224, 224, 0.6);
+        }
+
+        .video-url-input:focus {
+            border-image: var(--gradient-2) 1;
+            box-shadow: 0 0 25px rgba(167, 45, 255, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .download-button {
+            padding: 18px 35px;
+            border: none;
+            border-radius: 12px;
+            background: var(--gradient-2);
+            color: white;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease, transform 0.1s ease;
+            box-shadow: 0 5px 20px rgba(167, 45, 255, 0.4);
+            position: relative;
+            overflow: hidden;
+            letter-spacing: 0.5px;
+        }
+
+        .download-button:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 8px 30px rgba(167, 45, 255, 0.6);
+        }
+
+        .download-button:active {
+            transform: translateY(0px) scale(0.98);
+            box-shadow: 0 2px 10px rgba(167, 45, 255, 0.3);
+        }
+
+        /* Category Tags */
+        .category-tags {
+            margin-top: 25px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .category-tag {
+            display: inline-flex;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: rgba(0, 198, 255, 0.15);
+            border-radius: 30px;
+            font-size: 0.9em;
+            color: var(--text-light);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0, 198, 255, 0.3);
+        }
+
+        .category-tag:hover {
+            background-color: rgba(167, 45, 255, 0.25);
+            border-color: rgba(167, 45, 255, 0.6);
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 5px 15px rgba(167, 45, 255, 0.3);
+        }
+
+        .category-tag i { /* For Font Awesome icons */
+            margin-right: 8px;
+            font-size: 1.1em;
+        }
+
+        /* Download Progress/Status (Conceptual) */
+        .status-section {
+            margin-top: 40px;
+            padding: 25px;
+            background: var(--dark-card);
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            display: none; /* Hidden by default */
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .progress-bar {
+            width: 80%;
+            height: 12px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            width: 0%; /* Will be controlled by JS */
+            background: linear-gradient(90deg, var(--neon-green), var(--primary-blue));
+            border-radius: 6px;
+            transition: width 0.4s ease-out;
+        }
+
+        .status-message {
+            font-size: 1.1em;
+            color: var(--neon-green);
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 50px;
+            font-size: 0.85em;
+            color: rgba(224, 224, 224, 0.5);
+        }
+
+        /* Media Queries for Responsiveness */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5em;
+            }
+            .input-section {
+                flex-direction: column;
+                gap: 20px;
+            }
+            .video-url-input {
+                width: 90%;
+            }
+            .download-button {
+                width: 90%;
+            }
+            .container {
+                padding: 30px 20px;
+            }
+        }
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 2em;
+            }
+            .category-tag {
+                padding: 8px 15px;
+                font-size: 0.8em;
+            }
+        }
+    </style>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- Background Animations -->
+    <div class="background-stars"></div>
+    <div class="background-portal"></div>
+
+    <div class="container">
+        <h1>SaveVideo4Free</h1>
+        <p class="tagline">Your Gateway to Free Video Downloads</p>
+
+        <div class="input-section">
+            <input type="text" id="videoUrlInput" class="video-url-input" placeholder="Paste Your Video Link Here...">
+            <button id="downloadBtn" class="download-button">Download Now</button>
+        </div>
+
+        <div class="category-tags">
+            <span class="category-tag"><i class="fab fa-youtube"></i> YouTube Videos</span>
+            <span class="category-tag"><i class="fab fa-instagram"></i> Instagram Videos</span>
+            <span class="category-tag"><i class="fab fa-tiktok"></i> TikTok Videos</span>
+            <span class="category-tag"><i class="fas fa-music"></i> Songs</span>
+            <span class="category-tag"><i class="fas fa-exchange-alt"></i> Convert to MP3</span>
+            <!-- Add more categories if needed -->
+        </div>
+
+        <div id="statusSection" class="status-section">
+            <p class="status-message">Processing your request...</p>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressBarFill"></div>
+            </div>
+            <p id="progressText">0% Complete</p>
+        </div>
+
+        <p class="footer">© 2023 SaveVideo4Free. All rights reserved.</p>
+    </div>
+
+    <script>
+        // --- Client-side JavaScript (Conceptual for UI interactions) ---
+        // ACTUAL VIDEO DOWNLOADING REQUIRES A SERVER-SIDE SOLUTION.
+        // This JS is for UI effects and demonstrating the client-side flow.
+
+        const videoUrlInput = document.getElementById('videoUrlInput');
+        const downloadBtn = document.getElementById('downloadBtn');
+        const statusSection = document.getElementById('statusSection');
+        const progressBarFill = document.getElementById('progressBarFill');
+        const progressText = document.getElementById('progressText');
+
+        downloadBtn.addEventListener('click', () => {
+            const url = videoUrlInput.value.trim();
+            if (url) {
+                // In a real application, you'd send this URL to your backend server.
+                // For this front-end demo, we'll simulate a download process.
+                
+                statusSection.style.display = 'flex'; // Show status section
+                progressBarFill.style.width = '0%';
+                progressText.textContent = '0% Complete';
+                statusSection.querySelector('.status-message').textContent = 'Fetching video information...';
+
+                let progress = 0;
+                const interval = setInterval(() => {
+                    progress += Math.floor(Math.random() * 15) + 5; // Simulate progress
+                    if (progress > 100) progress = 100;
+
+                    progressBarFill.style.width = `${progress}%`;
+                    progressText.textContent = `${progress}% Complete`;
+
+                    if (progress === 100) {
+                        clearInterval(interval);
+                        statusSection.querySelector('.status-message').textContent = 'Download ready! (Link will appear here)';
+                        // In a real scenario, your backend would provide a download link here.
+                        // You'd update the UI to show that link.
+                        alert('Simulated Download Complete! (A download link would appear here)');
+                    }
+                }, 800);
+
+            } else {
+                alert('Please paste a video URL!');
+                videoUrlInput.focus();
+            }
+        });
+
+        // Optional: Dynamic input glow based on content
+        videoUrlInput.addEventListener('input', () => {
+            if (videoUrlInput.value.trim().length > 0) {
+                videoUrlInput.style.borderColor = 'rgba(0, 198, 255, 0.7)'; // Brighter border when typing
+                videoUrlInput.style.boxShadow = '0 0 20px rgba(0, 198, 255, 0.3)';
+            } else {
+                videoUrlInput.style.borderColor = 'transparent'; // Reset
+                videoUrlInput.style.boxShadow = '0 0 15px rgba(0, 198, 255, 0.2)';
+            }
+        });
+
+        // Platform detection (very basic, for UI hints)
+        videoUrlInput.addEventListener('keyup', () => {
+            const url = videoUrlInput.value.trim();
+            // This would trigger more complex background changes in a full implementation
+            if (url.includes('youtube.com') || url.includes('youtu.be')) {
+                console.log('YouTube link detected!');
+                // Add class to body for YouTube-specific portal color or background
+            } else if (url.includes('instagram.com')) {
+                console.log('Instagram link detected!');
+            } else if (url.includes('tiktok.com')) {
+                console.log('TikTok link detected!');
+            }
+        });
+
+        // Basic category tag click effect (no actual filtering in this demo)
+        document.querySelectorAll('.category-tag').forEach(tag => {
+            tag.addEventListener('click', () => {
+                console.log(`Clicked category: ${tag.textContent.trim()}`);
+                // In a real app, this might show specific instructions or advanced options.
+            });
+        });
+
+    </script>
+</body>
+</html>
